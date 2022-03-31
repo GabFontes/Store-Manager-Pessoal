@@ -7,10 +7,10 @@ productRouter.get('/', productController.list);
 productRouter.post('/', validateName, validateQuantity,
   productController.create);
 
+productRouter.delete('/:id', productController.deleteProduct);
+
 productRouter.put('/:id', validateName, validateQuantity,
   productController.update);
-
-productRouter.delete('/:id', productController.deleteProduct);
 
 productRouter.get('/:id', productController.listById);
 
