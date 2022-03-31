@@ -42,18 +42,17 @@ const create = async (sale) => {
   };
 };
 
-const update = async (productId, quantity, id) => {
-  console.log('model', productId, quantity, id);
+const update = async (values, id) => {
   const query = `UPDATE StoreManager.sales_products 
   SET product_id = ?, quantity = ? WHERE sale_id = ?`;
-  await connection.execute(query, [productId, quantity, id]);
-  return {
+  const promises = values.map(({ productId, quantity }) => connection
+    .execute(query, [productId, quantity, id]));
+    await Promise.all(promises);
+  const responseObj = {
     saleId: id,
-    itemUpdated: [{
-      productId,
-      quantity,
-    }],
+    itemUpdated: values,
   };
+  return responseObj;
 };
 
 module.exports = {

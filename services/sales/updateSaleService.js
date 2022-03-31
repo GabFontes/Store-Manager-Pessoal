@@ -1,8 +1,7 @@
 const salesModel = require('../../models/salesModel');
 
-const updateSaleService = async (productId, quantity, id) => {
-  console.log('services', { productId, quantity, id });
-  const updatedSale = await salesModel.update(productId, quantity, id);
+const updateSaleService = async (values, id) => {
+  const updatedSale = await salesModel.update(values, id);
   return updatedSale;
 };
 
