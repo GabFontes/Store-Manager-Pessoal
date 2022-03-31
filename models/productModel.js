@@ -44,10 +44,21 @@ const update = async (id, name, quantity) => {
   throw new Error('Product not found');
 };
 
+const deleteProduct = async (id) => {
+  const productExists = await listById(id);
+  if (productExists.length) {
+    const query = 'DELETE FROM StoreManager.products WHERE id = ?;';
+    await connection.execute(query, [id]);
+    return null;
+  }
+  throw new Error('Product not found');
+};
+
 module.exports = {
   list,
   listById,
   create,
   verifyProductExistsName,
   update,
+  deleteProduct,
 };
