@@ -2,7 +2,7 @@ const connection = require('./connection');
 
 const list = async () => {
   const query = `SELECT
-    SA.id AS saleId, 
+    SA.id AS saleId,
     SA.date,
     SL.product_id AS productId,
     SL.quantity
@@ -43,7 +43,7 @@ const create = async (sale) => {
 };
 
 const update = async (values, id) => {
-  const query = `UPDATE StoreManager.sales_products 
+  const query = `UPDATE StoreManager.sales_products
   SET product_id = ?, quantity = ? WHERE sale_id = ?`;
   const promises = values.map(({ productId, quantity }) => connection
     .execute(query, [productId, quantity, id]));
